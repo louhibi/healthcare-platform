@@ -1,0 +1,338 @@
+services:
+  # PostgreSQL Databases
+  user-db:
+    image: postgres:15-alpine
+    container_name: healthcare-user-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${USER_DB_NAME}
+      POSTGRES_USER: ${USER_DB_USER}
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - user_db_data:/var/lib/postgresql/data
+      - ./infrastructure/database/init-user-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d user_service_db"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  patient-db:
+    image: postgres:15-alpine
+    container_name: healthcare-patient-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${PATIENT_DB_NAME}
+      POSTGRES_USER: ${PATIENT_DB_USER}
+      POSTGRES_PASSWORD: ${PATIENT_DB_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - patient_db_data:/var/lib/postgresql/data
+      - ./infrastructure/database/init-patient-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d patient_service_db"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  appointment-db:
+    image: postgres:15-alpine
+    container_name: healthcare-appointment-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${APPOINTMENT_DB_NAME}
+      POSTGRES_USER: ${APPOINTMENT_DB_USER}
+      POSTGRES_PASSWORD: ${APPOINTMENT_DB_PASSWORD}
+    ports:
+      - "5434:5432"
+    volumes:
+      - appointment_db_data:/var/lib/postgresql/data
+      - ./infrastructure/database/init-appointment-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d appointment_service_db"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  location-db:
+    image: postgres:15-alpine
+    container_name: healthcare-location-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${LOCATION_DB_NAME}
+      POSTGRES_USER: ${LOCATION_DB_USER}
+      POSTGRES_PASSWORD: ${LOCATION_DB_PASSWORD}
+    ports:
+      - "5435:5432"
+    volumes:
+      - location_db_data:/var/lib/postgresql/data
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d location_service_db"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    container_name: healthcare-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
+  # Microservices
+  user-service:
+    build:
+      context: ./services/user-service
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-user-service
+    env_file:
+      - .env
+      - ./services/user-service/.env.example
+    environment:
+      DB_HOST: ${USER_DB_HOST}
+      DB_PORT: ${USER_DB_PORT}
+      DB_USER: ${USER_DB_USER}
+      DB_PASSWORD: ${USER_DB_PASSWORD}
+      DB_NAME: ${USER_DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      PORT: ${USER_SERVICE_PORT}
+      ENV: ${APP_ENV}
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - "${USER_SERVICE_PORT}:${USER_SERVICE_PORT}"
+    depends_on:
+      user-db:
+        condition: service_healthy
+      location-service:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
+  patient-service:
+    build:
+      context: ./services/patient-service
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-patient-service
+    env_file:
+      - .env
+      - ./services/patient-service/.env.example
+    environment:
+      DB_HOST: ${PATIENT_DB_HOST}
+      DB_PORT: ${PATIENT_DB_PORT}
+      DB_USER: ${PATIENT_DB_USER}
+      DB_PASSWORD: ${PATIENT_DB_PASSWORD}
+      DB_NAME: ${PATIENT_DB_NAME}
+      PORT: ${PATIENT_SERVICE_PORT}
+      ENV: ${APP_ENV}
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - "${PATIENT_SERVICE_PORT}:${PATIENT_SERVICE_PORT}"
+    depends_on:
+      patient-db:
+        condition: service_healthy
+      location-service:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8082/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
+  appointment-service:
+    build:
+      context: ./services/appointment-service
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-appointment-service
+    env_file:
+      - .env
+      - ./services/appointment-service/.env.example
+    environment:
+      DB_HOST: ${APPOINTMENT_DB_HOST}
+      DB_PORT: ${APPOINTMENT_DB_PORT}
+      DB_USER: ${APPOINTMENT_DB_USER}
+      DB_PASSWORD: ${APPOINTMENT_DB_PASSWORD}
+      DB_NAME: ${APPOINTMENT_DB_NAME}
+      PORT: ${APPOINTMENT_SERVICE_PORT}
+      ENV: ${APP_ENV}
+      LOG_LEVEL: ${LOG_LEVEL}
+      USER_SERVICE_URL: ${USER_SERVICE_URL}
+    ports:
+      - "${APPOINTMENT_SERVICE_PORT}:${APPOINTMENT_SERVICE_PORT}"
+    depends_on:
+      appointment-db:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8083/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
+  location-service:
+    build:
+      context: ./services/location-service
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-location-service
+    env_file:
+      - .env
+    environment:
+      DB_HOST: ${LOCATION_DB_HOST}
+      DB_PORT: ${LOCATION_DB_PORT}
+      DB_USER: ${LOCATION_DB_USER}
+      DB_PASSWORD: ${LOCATION_DB_PASSWORD}
+      DB_NAME: ${LOCATION_DB_NAME}
+      PORT: ${LOCATION_SERVICE_PORT}
+      ENV: ${APP_ENV}
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - "${LOCATION_SERVICE_PORT}:${LOCATION_SERVICE_PORT}"
+    depends_on:
+      location-db:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:${LOCATION_SERVICE_PORT}/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-api-gateway
+    env_file:
+      - .env
+    environment:
+      PORT: ${API_GATEWAY_PORT}
+      USER_SERVICE_URL: ${USER_SERVICE_URL}
+      PATIENT_SERVICE_URL: ${PATIENT_SERVICE_URL}
+      APPOINTMENT_SERVICE_URL: ${APPOINTMENT_SERVICE_URL}
+      LOCATION_SERVICE_URL: ${LOCATION_SERVICE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+      RATE_LIMIT_RPM: ${RATE_LIMIT_REQUESTS_PER_MINUTE}
+      RATE_LIMIT_BURST: 20
+      LOG_LEVEL: ${LOG_LEVEL}
+      ENV: ${APP_ENV}
+    ports:
+      - "0.0.0.0:${API_GATEWAY_PORT}:${API_GATEWAY_PORT}"
+    depends_on:
+      user-service:
+        condition: service_healthy
+      patient-service:
+        condition: service_healthy
+      appointment-service:
+        condition: service_healthy
+      location-service:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
+  # Frontend (Vue.js)
+  frontend:
+    build:
+      context: ./frontend/patient-portal
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}
+        VITE_API_BASE_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}/api
+    container_name: healthcare-frontend
+    env_file:
+      - .env
+      - ./frontend/patient-portal/.env.example
+    environment:
+      VITE_API_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}
+      VITE_API_BASE_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}/api
+    ports:
+      - "0.0.0.0:3000:3000"
+    depends_on:
+      api-gateway:
+        condition: service_healthy
+      location-service:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    restart: unless-stopped
+
+  # Development tools
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: healthcare-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@healthcare.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - user-db
+      - patient-db
+      - appointment-db
+      - location-db
+    networks:
+      - healthcare-network
+    profiles:
+      - dev
+
+volumes:
+  user_db_data:
+  patient_db_data:
+  appointment_db_data:
+  location_db_data:
+  redis_data:
+
+networks:
+  healthcare-network:
+    driver: bridge

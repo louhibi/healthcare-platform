@@ -1,0 +1,431 @@
+{
+  "common": {
+    "loading": "جاري التحميل...",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "search": "بحث",
+    "close": "إغلاق",
+    "submit": "إرسال",
+    "reset": "إعادة تعيين",
+    "confirm": "تأكيد",
+    "yes": "نعم",
+    "no": "لا",
+    "required": "مطلوب",
+    "optional": "اختياري",
+    "select": "اختيار",
+    "none": "لا شيء",
+    "all": "الكل",
+    "next": "التالي",
+    "previous": "السابق",
+    "back": "العودة",
+    "continue": "متابعة",
+    "finish": "إنهاء",
+    "actions": "الإجراءات",
+    "view": "عرض",
+    "update": "تحديث",
+    "create": "إنشاء",
+    "manage": "إدارة",
+    "total": "المجموع",
+    "filter": "تصفية",
+    "refresh": "تحديث",
+    "export": "تصدير",
+    "import": "استيراد",
+    "print": "طباعة",
+    "download": "تحميل",
+    "upload": "رفع",
+    "settings": "الإعدادات",
+    "preferences": "التفضيلات",
+    "account": "الحساب",
+    "retry": "إعادة المحاولة",
+    "demographics": "البيانات الديموغرافية",
+    "yearsOld": "سنة"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "register": "التسجيل",
+    "email": "البريد الإلكتروني",
+    "emailAddress": "عنوان البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "firstName": "الاسم الأول",
+    "lastName": "اسم العائلة",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "rememberMe": "تذكرني",
+    "loginSuccess": "تم تسجيل الدخول بنجاح",
+    "loginError": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "registerSuccess": "تم التسجيل بنجاح",
+    "registerError": "فشل في التسجيل",
+    "signIn": "تسجيل الدخول إلى البوابة الصحية",
+    "signInSubtitle": "أو",
+    "createNewAccount": "إنشاء حساب جديد",
+    "signOut": "تسجيل الخروج",
+    "passwordChanged": "تم تغيير كلمة المرور بنجاح! يمكنك الآن استخدام التطبيق.",
+    "changePassword": "تغيير كلمة المرور",
+    "currentPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "profileSettings": "إعدادات الملف الشخصي"
+  },
+  "navigation": {
+    "home": "الرئيسية",
+    "patients": "المرضى",
+    "appointments": "المواعيد",
+    "availability": "التوفر",
+    "admin": "الإدارة",
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "healthcarePortal": "البوابة الصحية"
+  },
+  "patients": {
+    "title": "إدارة المرضى",
+    "subtitle": "إدارة سجلات المرضى لمؤسستك الصحية",
+    "addPatient": "إضافة مريض",
+    "editPatient": "تعديل المريض",
+    "viewPatient": "عرض المريض",
+    "deletePatient": "حذف المريض",
+    "patientDetails": "تفاصيل المريض",
+    "medicalHistory": "التاريخ الطبي",
+    "contactInfo": "معلومات الاتصال",
+    "insurance": "معلومات التأمين",
+    "emergencyContact": "جهة الاتصال الطارئة",
+    "searchPlaceholder": "البحث بالاسم، البريد الإلكتروني، رقم المريض، الهاتف أو العنوان...",
+    "searchLabel": "البحث عن المرضى",
+    "searchHelp": "البحث في الأسماء، معلومات الاتصال، أرقام المرضى والعناوين",
+    "patientList": "قائمة المرضى",
+    "noPatients": "لم يتم العثور على مرضى",
+    "patientAdded": "تم إضافة المريض بنجاح",
+    "patientUpdated": "تم تحديث المريض بنجاح",
+    "patientDeleted": "تم حذف المريض بنجاح",
+    "confirmDelete": "هل أنت متأكد من حذف هذا المريض؟",
+    "patientId": "رقم المريض",
+    "name": "الاسم",
+    "phone": "الهاتف",
+    "city": "المدينة",
+    "dateOfBirth": "تاريخ الميلاد",
+    "lastVisit": "آخر زيارة",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "patient": "المريض",
+    "noInsurance": "لا يوجد تأمين"
+  },
+  "appointments": {
+    "title": "إدارة المواعيد",
+    "subtitle": "جدولة وإدارة مواعيد المرضى",
+    "newAppointment": "موعد جديد",
+    "bookAppointment": "حجز موعد",
+    "editAppointment": "تعديل الموعد",
+    "viewAppointment": "عرض الموعد",
+    "cancelAppointment": "إلغاء الموعد",
+    "rescheduleAppointment": "إعادة جدولة الموعد",
+    "appointmentDetails": "تفاصيل الموعد",
+    "selectDoctor": "اختيار الطبيب",
+    "selectPatient": "اختيار المريض",
+    "selectDate": "اختيار التاريخ",
+    "selectTime": "اختيار الوقت",
+    "duration": "المدة",
+    "durationMinutes": "المدة (بالدقائق)",
+    "reason": "سبب الزيارة",
+    "notes": "ملاحظات",
+    "additionalNotes": "ملاحظات إضافية",
+    "priority": "الأولوية",
+    "date": "التاريخ",
+    "time": "الوقت",
+    "doctor": "الطبيب",
+    "patient": "المريض",
+    "status": {
+      "scheduled": "مجدول",
+      "confirmed": "مؤكد",
+      "completed": "مكتمل",
+      "cancelled": "ملغي",
+      "noShow": "لم يحضر"
+    },
+    "appointmentBooked": "تم حجز الموعد بنجاح",
+    "appointmentUpdated": "تم تحديث الموعد بنجاح",
+    "appointmentCancelled": "تم إلغاء الموعد بنجاح",
+    "noAppointments": "لم يتم العثور على مواعيد",
+    "todaysAppointments": "مواعيد اليوم",
+    "upcomingAppointments": "المواعيد القادمة",
+    "calendar": "التقويم",
+    "list": "قائمة",
+    "week": "أسبوع",
+    "month": "شهر",
+    "day": "يوم"
+  },
+  "forms": {
+    "patient": {
+      "title": "معلومات المريض",
+      "fields": {
+        "firstName": {
+          "label": "الاسم الأول",
+          "placeholder": "أدخل الاسم الأول"
+        },
+        "lastName": {
+          "label": "اسم العائلة",
+          "placeholder": "أدخل اسم العائلة"
+        },
+        "dateOfBirth": {
+          "label": "تاريخ الميلاد",
+          "placeholder": "اختر تاريخ الميلاد"
+        },
+        "gender": {
+          "label": "الجنس",
+          "placeholder": "اختر الجنس"
+        },
+        "phone": {
+          "label": "رقم الهاتف",
+          "placeholder": "أدخل رقم الهاتف"
+        },
+        "email": {
+          "label": "عنوان البريد الإلكتروني",
+          "placeholder": "أدخل عنوان البريد الإلكتروني"
+        },
+        "address": {
+          "label": "العنوان",
+          "placeholder": "أدخل عنوان الشارع"
+        },
+        "city": {
+          "label": "المدينة",
+          "placeholder": "أدخل المدينة"
+        },
+        "state": {
+          "label": "الولاية/المقاطعة",
+          "placeholder": "أدخل الولاية أو المقاطعة"
+        },
+        "postalCode": {
+          "label": "الرمز البريدي",
+          "placeholder": "أدخل الرمز البريدي"
+        },
+        "country": {
+          "label": "البلد",
+          "placeholder": "اختر البلد"
+        },
+        "nationality": {
+          "label": "الجنسية",
+          "placeholder": "أدخل الجنسية"
+        },
+        "maritalStatus": {
+          "label": "الحالة الاجتماعية",
+          "placeholder": "اختر الحالة الاجتماعية"
+        },
+        "occupation": {
+          "label": "المهنة",
+          "placeholder": "أدخل المهنة"
+        },
+        "insurance": {
+          "label": "نوع التأمين",
+          "placeholder": "اختر نوع التأمين",
+          "customLabel": "حدد نوع التأمين",
+          "customPlaceholder": "أدخل نوع التأمين"
+        },
+        "policyNumber": {
+          "label": "رقم البوليصة",
+          "placeholder": "أدخل رقم البوليصة"
+        },
+        "insuranceProvider": {
+          "label": "مقدم التأمين",
+          "placeholder": "اختر مقدم التأمين",
+          "selectTypeFirst": "اختر نوع التأمين أولاً",
+          "customLabel": "حدد مقدم التأمين",
+          "customPlaceholder": "أدخل اسم مقدم التأمين"
+        },
+        "nationalId": {
+          "label": "رقم الهوية الوطنية",
+          "placeholder": "أدخل رقم الهوية الوطنية CIN"
+        },
+        "emergencyContactName": {
+          "label": "اسم جهة الاتصال الطارئة",
+          "placeholder": "أدخل اسم جهة الاتصال الطارئة"
+        },
+        "emergencyContactPhone": {
+          "label": "هاتف جهة الاتصال الطارئة",
+          "placeholder": "أدخل هاتف جهة الاتصال الطارئة"
+        },
+        "emergencyContactRelation": {
+          "label": "علاقة جهة الاتصال الطارئة",
+          "placeholder": "أدخل العلاقة"
+        },
+        "medicalHistory": {
+          "label": "التاريخ الطبي",
+          "placeholder": "أدخل التاريخ الطبي"
+        },
+        "allergies": {
+          "label": "الحساسية",
+          "placeholder": "أدخل أي حساسية"
+        },
+        "medications": {
+          "label": "الأدوية الحالية",
+          "placeholder": "أدخل الأدوية الحالية"
+        },
+        "bloodType": {
+          "label": "فصيلة الدم",
+          "placeholder": "اختر فصيلة الدم"
+        }
+      }
+    },
+    "appointment": {
+      "title": "معلومات الموعد",
+      "fields": {
+        "patientId": {
+          "label": "المريض",
+          "placeholder": "اختر المريض"
+        },
+        "doctorId": {
+          "label": "الطبيب",
+          "placeholder": "اختر الطبيب"
+        },
+        "appointmentDate": {
+          "label": "تاريخ الموعد",
+          "placeholder": "اختر التاريخ"
+        },
+        "appointmentTime": {
+          "label": "وقت الموعد",
+          "placeholder": "اختر الوقت"
+        },
+        "duration": {
+          "label": "المدة (بالدقائق)",
+          "placeholder": "أدخل المدة"
+        },
+        "reason": {
+          "label": "سبب الزيارة",
+          "placeholder": "أدخل سبب الزيارة"
+        },
+        "notes": {
+          "label": "ملاحظات إضافية",
+          "placeholder": "أدخل أي ملاحظات إضافية"
+        },
+        "priority": {
+          "label": "الأولوية",
+          "placeholder": "اختر مستوى الأولوية"
+        }
+      }
+    }
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال عنوان بريد إلكتروني صالح",
+    "phone": "يرجى إدخال رقم هاتف صالح",
+    "minLength": "الحد الأدنى للطول هو {min} أحرف",
+    "maxLength": "الحد الأقصى للطول هو {max} أحرف",
+    "pattern": "يرجى إدخال قيمة صالحة",
+    "date": "يرجى إدخال تاريخ صالح",
+    "time": "يرجى إدخال وقت صالح",
+    "number": "يرجى إدخال رقم صالح",
+    "postalCode": "يرجى إدخال رمز بريدي صالح"
+  },
+  "errors": {
+    "general": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "network": "خطأ في الشبكة. يرجى التحقق من اتصالك.",
+    "notFound": "لم يتم العثور على المورد المطلوب.",
+    "unauthorized": "غير مصرح لك بتنفيذ هذا الإجراء.",
+    "forbidden": "تم رفض الوصول.",
+    "serverError": "خطأ في الخادم. يرجى المحاولة مرة أخرى لاحقاً.",
+    "validation": "يرجى تصحيح الحقول المميزة.",
+    "formConfigNotAvailable": "تكوين النموذج غير متاح. لا يمكن تعديل المريض."
+  },
+  "success": {
+    "saved": "تم حفظ التغييرات بنجاح",
+    "deleted": "تم حذف العنصر بنجاح",
+    "created": "تم إنشاء العنصر بنجاح",
+    "updated": "تم تحديث العنصر بنجاح"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "welcome": "مرحباً بعودتك",
+    "overview": "نظرة عامة",
+    "statistics": "الإحصائيات",
+    "recentActivity": "النشاط الأخير",
+    "quickActions": "الإجراءات السريعة",
+    "totalPatients": "إجمالي المرضى",
+    "todaysAppointments": "مواعيد اليوم",
+    "pendingAppointments": "المواعيد المعلقة",
+    "completedAppointments": "المواعيد المكتملة"
+  },
+  "availability": {
+    "title": "توفر الطبيب",
+    "subtitle": "تحديد ساعات العمل والتوفر",
+    "schedule": "الجدول",
+    "workingHours": "ساعات العمل",
+    "breaks": "فترات الراحة",
+    "timeOff": "إجازة",
+    "recurring": "متكرر",
+    "oneTime": "مرة واحدة",
+    "startTime": "وقت البداية",
+    "endTime": "وقت النهاية",
+    "monday": "الاثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "available": "متوفر",
+    "unavailable": "غير متوفر",
+    "holiday": "عطلة",
+    "vacation": "إجازة",
+    "sick": "إجازة مرضية",
+    "updateSchedule": "تحديث الجدول",
+    "scheduleUpdated": "تم تحديث الجدول بنجاح"
+  },
+  "admin": {
+    "title": "الإدارة",
+    "dashboard": "لوحة تحكم الإدارة",
+    "formConfig": "تكوين النماذج",
+    "userManagement": "إدارة المستخدمين",
+    "doctorManagement": "إدارة الأطباء",
+    "systemSettings": "إعدادات النظام",
+    "reports": "التقارير",
+    "localization": "التوطين",
+    "translations": "الترجمات",
+    "supportedLocales": "اللغات المدعومة",
+    "currentLocale": "اللغة الحالية",
+    "changeLocale": "تغيير اللغة",
+    "createDoctor": "إنشاء طبيب",
+    "doctorCreated": "تم إنشاء الطبيب بنجاح",
+    "temporaryPassword": "كلمة مرور مؤقتة",
+    "passwordExpires": "تنتهي كلمة المرور خلال 7 أيام",
+    "licenseNumber": "رقم الترخيص",
+    "specialization": "التخصص",
+    "users": "المستخدمون",
+    "doctors": "الأطباء",
+    "configuration": "التكوين"
+  },
+  "modals": {
+    "confirmTitle": "تأكيد الإجراء",
+    "confirmMessage": "هل أنت متأكد من المتابعة؟",
+    "deleteTitle": "تأكيد الحذف",
+    "deleteMessage": "لا يمكن التراجع عن هذا الإجراء.",
+    "unsavedChanges": "لديك تغييرات غير محفوظة. هل أنت متأكد من المغادرة؟",
+    "sessionExpired": "انتهت جلستك. يرجى تسجيل الدخول مرة أخرى."
+  },
+  "tables": {
+    "noData": "لا توجد بيانات متاحة",
+    "loading": "جاري تحميل البيانات...",
+    "rowsPerPage": "صفوف لكل صفحة",
+    "of": "من",
+    "firstPage": "الصفحة الأولى",
+    "lastPage": "الصفحة الأخيرة",
+    "nextPage": "الصفحة التالية",
+    "previousPage": "الصفحة السابقة",
+    "showing": "عرض",
+    "to": "إلى",
+    "results": "نتائج"
+  },
+  "time": {
+    "now": "الآن",
+    "today": "اليوم",
+    "yesterday": "أمس",
+    "tomorrow": "غداً",
+    "thisWeek": "هذا الأسبوع",
+    "lastWeek": "الأسبوع الماضي",
+    "nextWeek": "الأسبوع القادم",
+    "thisMonth": "هذا الشهر",
+    "lastMonth": "الشهر الماضي",
+    "nextMonth": "الشهر القادم",
+    "am": "ص",
+    "pm": "م"
+  }
+}

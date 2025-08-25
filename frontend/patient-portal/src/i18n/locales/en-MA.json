@@ -1,0 +1,453 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "close": "Close",
+    "submit": "Submit",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "required": "Required",
+    "optional": "Optional",
+    "select": "Select",
+    "none": "None",
+    "all": "All",
+    "next": "Next",
+    "previous": "Previous",
+    "back": "Back",
+    "continue": "Continue",
+    "finish": "Finish",
+    "actions": "Actions",
+    "view": "View",
+    "update": "Update",
+    "create": "Create",
+    "manage": "Manage",
+    "total": "total",
+    "filter": "Filter",
+    "refresh": "Refresh",
+    "export": "Export",
+    "import": "Import",
+    "print": "Print",
+    "download": "Download",
+    "upload": "Upload",
+    "settings": "Settings",
+    "preferences": "Preferences",
+    "account": "Account",
+    "retry": "Retry",
+    "demographics": "Demographics",
+    "yearsOld": "years old"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "register": "Register",
+    "email": "Email",
+    "emailAddress": "Email Address",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "loginSuccess": "Successfully logged in",
+    "loginError": "Invalid email or password",
+    "registerSuccess": "Registration successful",
+    "registerError": "Registration failed",
+    "signIn": "Sign in to Healthcare Portal",
+    "signInSubtitle": "Or",
+    "createNewAccount": "create a new account",
+    "signOut": "Sign out",
+    "passwordChanged": "Password changed successfully! You can now use the application.",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "newPassword": "New Password",
+    "profileSettings": "Profile Settings"
+  },
+  "navigation": {
+    "home": "Home",
+    "patients": "Patients",
+    "appointments": "Appointments",
+    "availability": "Availability",
+    "admin": "Administration",
+    "profile": "Profile",
+    "settings": "Settings",
+    "healthcarePortal": "Healthcare Portal"
+  },
+  "patients": {
+    "title": "Patient Management",
+    "subtitle": "Manage patient records for your healthcare facility",
+    "addPatient": "Add Patient",
+    "editPatient": "Edit Patient",
+    "viewPatient": "View Patient",
+    "deletePatient": "Delete Patient",
+    "patientDetails": "Patient Details",
+    "medicalHistory": "Medical History",
+    "contactInfo": "Contact Information",
+    "insurance": "Insurance Information",
+    "emergencyContact": "Emergency Contact",
+    "searchPlaceholder": "Search by name, email, patient ID, phone, or address...",
+    "searchLabel": "Search Patients",
+    "searchHelp": "Search across names, contact info, patient IDs, and addresses",
+    "patientList": "Patient List",
+    "noPatients": "No patients found",
+    "patientAdded": "Patient added successfully",
+    "patientUpdated": "Patient updated successfully",
+    "patientDeleted": "Patient deleted successfully",
+    "confirmDelete": "Are you sure you want to delete this patient?",
+    "patientId": "Patient ID",
+    "name": "Name",
+    "phone": "Phone",
+    "city": "City",
+    "dateOfBirth": "Date of Birth",
+    "lastVisit": "Last Visit",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "patient": "Patient",
+    "noInsurance": "No insurance"
+  },
+  "appointments": {
+    "title": "Appointment Management",
+    "subtitle": "Schedule and manage patient appointments",
+    "newAppointment": "New Appointment",
+    "bookAppointment": "Book Appointment",
+    "editAppointment": "Edit Appointment",
+    "viewAppointment": "View Appointment",
+    "cancelAppointment": "Cancel Appointment",
+    "rescheduleAppointment": "Reschedule Appointment",
+    "appointmentDetails": "Appointment Details",
+    "selectDoctor": "Select Doctor",
+    "selectPatient": "Select Patient",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "duration": "Duration",
+    "durationMinutes": "Duration (minutes)",
+    "reason": "Reason for Visit",
+    "notes": "Notes",
+    "additionalNotes": "Additional Notes",
+    "priority": "Priority",
+    "date": "Date",
+    "time": "Time",
+    "doctor": "Doctor",
+    "patient": "Patient",
+    "status": {
+      "scheduled": "Scheduled",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "noShow": "No Show"
+    },
+    "appointmentBooked": "Appointment booked successfully",
+    "appointmentUpdated": "Appointment updated successfully",
+    "appointmentCancelled": "Appointment cancelled successfully",
+    "noAppointments": "No appointments found",
+    "todaysAppointments": "Today's Appointments",
+    "upcomingAppointments": "Upcoming Appointments",
+    "calendar": "Calendar",
+    "list": "List",
+    "week": "Week",
+    "month": "Month",
+    "day": "Day"
+  },
+  "forms": {
+    "common": {
+      "dateFormat": "Date format: {format} (e.g., {example})",
+      "openDatePicker": "Open date picker"
+    },
+    "validation": {
+      "required": "This field is required",
+      "invalidDate": "Please enter a valid date",
+      "futureDate": "Birth date cannot be in the future",
+      "invalidAge": "Please enter a reasonable birth date (within last 150 years)"
+    },
+    "patient": {
+      "title": "Patient Information",
+      "fields": {
+        "firstName": {
+          "label": "First Name",
+          "placeholder": "Enter first name"
+        },
+        "lastName": {
+          "label": "Last Name", 
+          "placeholder": "Enter last name"
+        },
+        "dateOfBirth": {
+          "label": "Date of Birth",
+          "placeholder": "Select date of birth"
+        },
+        "gender": {
+          "label": "Gender",
+          "placeholder": "Select gender"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "Enter phone number"
+        },
+        "email": {
+          "label": "Email Address",
+          "placeholder": "Enter email address"
+        },
+        "address": {
+          "label": "Address",
+          "placeholder": "Enter street address"
+        },
+        "city": {
+          "label": "City",
+          "placeholder": "Enter city"
+        },
+        "state": {
+          "label": "State/Province",
+          "placeholder": "Enter state or province"
+        },
+        "postalCode": {
+          "label": "Postal Code",
+          "placeholder": "Enter postal code"
+        },
+        "country": {
+          "label": "Country",
+          "placeholder": "Select country"
+        },
+        "nationality": {
+          "label": "Nationality",
+          "placeholder": "Enter nationality"
+        },
+        "maritalStatus": {
+          "label": "Marital Status",
+          "placeholder": "Select marital status"
+        },
+        "occupation": {
+          "label": "Occupation",
+          "placeholder": "Enter occupation"
+        },
+        "insurance": {
+          "label": "Insurance Type",
+          "placeholder": "Select insurance type",
+          "customLabel": "Specify Insurance Type",
+          "customPlaceholder": "Enter insurance type"
+        },
+        "policyNumber": {
+          "label": "Policy Number",
+          "placeholder": "Enter policy number"
+        },
+        "insuranceProvider": {
+          "label": "Insurance Provider",
+          "placeholder": "Select insurance provider",
+          "selectTypeFirst": "Select insurance type first",
+          "customLabel": "Specify Insurance Provider",
+          "customPlaceholder": "Enter insurance provider name"
+        },
+        "nationalId": {
+          "label": "National ID",
+          "placeholder": "Enter national ID"
+        },
+        "emergencyContactName": {
+          "label": "Emergency Contact Name",
+          "placeholder": "Enter emergency contact name"
+        },
+        "emergencyContactPhone": {
+          "label": "Emergency Contact Phone",
+          "placeholder": "Enter emergency contact phone"
+        },
+        "emergencyContactRelation": {
+          "label": "Emergency Contact Relationship",
+          "placeholder": "Enter relationship"
+        },
+        "medicalHistory": {
+          "label": "Medical History",
+          "placeholder": "Enter medical history"
+        },
+        "allergies": {
+          "label": "Allergies",
+          "placeholder": "Enter any allergies"
+        },
+        "medications": {
+          "label": "Current Medications",
+          "placeholder": "Enter current medications"
+        },
+        "bloodType": {
+          "label": "Blood Type",
+          "placeholder": "Select blood type"
+        }
+      }
+    },
+    "appointment": {
+      "title": "Appointment Information",
+      "fields": {
+        "patientId": {
+          "label": "Patient",
+          "placeholder": "Select patient"
+        },
+        "doctorId": {
+          "label": "Doctor",
+          "placeholder": "Select doctor"
+        },
+        "appointmentDate": {
+          "label": "Appointment Date",
+          "placeholder": "Select date"
+        },
+        "appointmentTime": {
+          "label": "Appointment Time",
+          "placeholder": "Select time"
+        },
+        "duration": {
+          "label": "Duration (minutes)",
+          "placeholder": "Enter duration"
+        },
+        "reason": {
+          "label": "Reason for Visit",
+          "placeholder": "Enter reason for visit"
+        },
+        "notes": {
+          "label": "Additional Notes",
+          "placeholder": "Enter any additional notes"
+        },
+        "priority": {
+          "label": "Priority",
+          "placeholder": "Select priority level"
+        }
+      }
+    }
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "minLength": "Minimum length is {min} characters",
+    "maxLength": "Maximum length is {max} characters",
+    "pattern": "Please enter a valid value",
+    "date": "Please enter a valid date",
+    "time": "Please enter a valid time",
+    "number": "Please enter a valid number",
+    "postalCode": "Please enter a valid postal code"
+  },
+  "admin": {
+    "title": "Administration",
+    "formConfig": "Form Configuration",
+    "userManagement": "User Management",
+    "systemSettings": "System Settings",
+    "reports": "Reports",
+    "localization": "Localization",
+    "translations": "Translations",
+    "supportedLocales": "Supported Locales",
+    "currentLocale": "Current Locale",
+    "changeLocale": "Change Language"
+  },
+  "errors": {
+    "general": "An error occurred. Please try again.",
+    "network": "Network error. Please check your connection.",
+    "notFound": "The requested resource was not found.",
+    "unauthorized": "You are not authorized to perform this action.",
+    "forbidden": "Access denied.",
+    "serverError": "Server error. Please try again later.",
+    "validation": "Please correct the highlighted fields.",
+    "formConfigNotAvailable": "Form configuration not available. Cannot edit patient."
+  },
+  "success": {
+    "saved": "Changes saved successfully",
+    "deleted": "Item deleted successfully",
+    "created": "Item created successfully",
+    "updated": "Item updated successfully"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome back",
+    "overview": "Overview",
+    "statistics": "Statistics",
+    "recentActivity": "Recent Activity",
+    "quickActions": "Quick Actions",
+    "totalPatients": "Total Patients",
+    "todaysAppointments": "Today's Appointments",
+    "pendingAppointments": "Pending Appointments",
+    "completedAppointments": "Completed Appointments"
+  },
+  "availability": {
+    "title": "Doctor Availability",
+    "subtitle": "Set your working hours and availability",
+    "schedule": "Schedule",
+    "workingHours": "Working Hours",
+    "breaks": "Breaks",
+    "timeOff": "Time Off",
+    "recurring": "Recurring",
+    "oneTime": "One Time",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "holiday": "Holiday",
+    "vacation": "Vacation",
+    "sick": "Sick Leave",
+    "updateSchedule": "Update Schedule",
+    "scheduleUpdated": "Schedule updated successfully"
+  },
+  "admin": {
+    "title": "Administration",
+    "dashboard": "Admin Dashboard",
+    "formConfig": "Form Configuration",
+    "userManagement": "User Management",
+    "doctorManagement": "Doctor Management",
+    "systemSettings": "System Settings",
+    "reports": "Reports",
+    "localization": "Localization",
+    "translations": "Translations",
+    "supportedLocales": "Supported Locales",
+    "currentLocale": "Current Locale",
+    "changeLocale": "Change Language",
+    "createDoctor": "Create Doctor",
+    "doctorCreated": "Doctor created successfully",
+    "temporaryPassword": "Temporary Password",
+    "passwordExpires": "Password expires in 7 days",
+    "licenseNumber": "License Number",
+    "specialization": "Specialization",
+    "users": "Users",
+    "doctors": "Doctors",
+    "configuration": "Configuration"
+  },
+  "modals": {
+    "confirmTitle": "Confirm Action",
+    "confirmMessage": "Are you sure you want to proceed?",
+    "deleteTitle": "Delete Confirmation",
+    "deleteMessage": "This action cannot be undone.",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
+    "sessionExpired": "Your session has expired. Please log in again."
+  },
+  "tables": {
+    "noData": "No data available",
+    "loading": "Loading data...",
+    "rowsPerPage": "Rows per page",
+    "of": "of",
+    "firstPage": "First page",
+    "lastPage": "Last page",
+    "nextPage": "Next page",
+    "previousPage": "Previous page",
+    "showing": "Showing",
+    "to": "to",
+    "results": "results"
+  },
+  "time": {
+    "now": "Now",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "tomorrow": "Tomorrow",
+    "thisWeek": "This Week",
+    "lastWeek": "Last Week",
+    "nextWeek": "Next Week",
+    "thisMonth": "This Month",
+    "lastMonth": "Last Month",
+    "nextMonth": "Next Month",
+    "am": "AM",
+    "pm": "PM"
+  }
+}

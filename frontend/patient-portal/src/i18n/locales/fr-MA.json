@@ -1,0 +1,359 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "add": "Ajouter",
+    "search": "Rechercher",
+    "close": "Fermer",
+    "submit": "Soumettre",
+    "reset": "Réinitialiser",
+    "confirm": "Confirmer",
+    "yes": "Oui",
+    "no": "Non",
+    "required": "Obligatoire",
+    "optional": "Optionnel",
+    "select": "Sélectionner",
+    "none": "Aucun",
+    "all": "Tous",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "back": "Retour",
+    "continue": "Continuer",
+    "finish": "Terminer",
+    "actions": "Actions",
+    "view": "Voir",
+    "update": "Mettre à jour",
+    "create": "Créer",
+    "manage": "Gérer",
+    "total": "total",
+    "filter": "Filtrer",
+    "refresh": "Actualiser",
+    "export": "Exporter",
+    "import": "Importer",
+    "print": "Imprimer",
+    "download": "Télécharger",
+    "upload": "Téléverser",
+    "settings": "Paramètres",
+    "preferences": "Préférences",
+    "account": "Compte",
+    "retry": "Réessayer",
+    "demographics": "Données démographiques",
+    "yearsOld": "ans"
+  },
+  "forms": {
+    "common": {
+      "dateFormat": "Format de date: {format} (par ex., {example})",
+      "openDatePicker": "Ouvrir le sélecteur de date"
+    },
+    "validation": {
+      "required": "Ce champ est obligatoire",
+      "invalidDate": "Veuillez saisir une date valide",
+      "futureDate": "La date de naissance ne peut pas être dans le futur",
+      "invalidAge": "Veuillez saisir une date de naissance raisonnable (dans les 150 dernières années)"
+    }
+  },
+  "auth": {
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "register": "Inscription",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "forgotPassword": "Mot de passe oublié ?",
+    "rememberMe": "Se souvenir de moi",
+    "loginSuccess": "Connexion réussie",
+    "loginError": "E-mail ou mot de passe invalide",
+    "registerSuccess": "Inscription réussie",
+    "registerError": "Échec de l'inscription"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "patients": "Patients",
+    "appointments": "Rendez-vous",
+    "availability": "Disponibilité",
+    "admin": "Administration",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "healthcarePortal": "Portail de Santé"
+  },
+  "patients": {
+    "title": "Gestion des patients",
+    "subtitle": "Gérer les dossiers patients de votre établissement de santé",
+    "addPatient": "Ajouter un patient",
+    "editPatient": "Modifier le patient",
+    "viewPatient": "Voir le patient",
+    "deletePatient": "Supprimer le patient",
+    "patientDetails": "Détails du patient",
+    "medicalHistory": "Historique médical",
+    "contactInfo": "Informations de contact",
+    "insurance": "Informations d'assurance",
+    "emergencyContact": "Contact d'urgence",
+    "searchPlaceholder": "Rechercher par nom, e-mail, ID patient, téléphone ou adresse...",
+    "searchLabel": "Rechercher des patients",
+    "searchHelp": "Rechercher dans les noms, coordonnées, ID patients et adresses",
+    "patientList": "Liste des patients",
+    "noPatients": "Aucun patient trouvé",
+    "patientAdded": "Patient ajouté avec succès",
+    "patientUpdated": "Patient mis à jour avec succès",
+    "patientDeleted": "Patient supprimé avec succès",
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce patient ?",
+    "patientId": "ID Patient",
+    "name": "Nom",
+    "phone": "Téléphone",
+    "city": "Ville",
+    "dateOfBirth": "Date de naissance",
+    "lastVisit": "Dernière visite",
+    "status": "État",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "patient": "Patient",
+    "noInsurance": "Aucune assurance"
+  },
+  "appointments": {
+    "title": "Gestion des rendez-vous",
+    "newAppointment": "Nouveau rendez-vous",
+    "editAppointment": "Modifier le rendez-vous",
+    "viewAppointment": "Voir le rendez-vous",
+    "cancelAppointment": "Annuler le rendez-vous",
+    "rescheduleAppointment": "Reprogrammer le rendez-vous",
+    "appointmentDetails": "Détails du rendez-vous",
+    "selectDoctor": "Sélectionner un médecin",
+    "selectPatient": "Sélectionner un patient",
+    "selectDate": "Sélectionner la date",
+    "selectTime": "Sélectionner l'heure",
+    "duration": "Durée",
+    "reason": "Motif de la visite",
+    "notes": "Notes",
+    "status": {
+      "scheduled": "Programmé",
+      "confirmed": "Confirmé", 
+      "completed": "Terminé",
+      "cancelled": "Annulé",
+      "noShow": "Absence"
+    },
+    "appointmentBooked": "Rendez-vous réservé avec succès",
+    "appointmentUpdated": "Rendez-vous mis à jour avec succès",
+    "appointmentCancelled": "Rendez-vous annulé avec succès"
+  },
+  "forms": {
+    "patient": {
+      "title": "Informations du patient",
+      "fields": {
+        "firstName": {
+          "label": "Prénom",
+          "placeholder": "Saisissez le prénom"
+        },
+        "lastName": {
+          "label": "Nom",
+          "placeholder": "Saisissez le nom"
+        },
+        "dateOfBirth": {
+          "label": "Date de naissance",
+          "placeholder": "Sélectionnez la date de naissance"
+        },
+        "gender": {
+          "label": "Sexe",
+          "placeholder": "Sélectionnez le sexe"
+        },
+        "phone": {
+          "label": "Numéro de téléphone",
+          "placeholder": "Saisissez le numéro de téléphone"
+        },
+        "email": {
+          "label": "Adresse e-mail",
+          "placeholder": "Saisissez l'adresse e-mail"
+        },
+        "address": {
+          "label": "Adresse",
+          "placeholder": "Saisissez l'adresse"
+        },
+        "city": {
+          "label": "Ville",
+          "placeholder": "Saisissez la ville"
+        },
+        "state": {
+          "label": "Région",
+          "placeholder": "Saisissez la région"
+        },
+        "postalCode": {
+          "label": "Code postal",
+          "placeholder": "Saisissez le code postal"
+        },
+        "country": {
+          "label": "Pays",
+          "placeholder": "Sélectionnez le pays"
+        },
+        "nationality": {
+          "label": "Nationalité",
+          "placeholder": "Saisissez la nationalité"
+        },
+        "maritalStatus": {
+          "label": "État civil",
+          "placeholder": "Sélectionnez l'état civil"
+        },
+        "occupation": {
+          "label": "Profession",
+          "placeholder": "Saisissez la profession"
+        },
+        "insurance": {
+          "label": "Type d'assurance",
+          "placeholder": "Sélectionnez le type d'assurance",
+          "customLabel": "Spécifiez le type d'assurance",
+          "customPlaceholder": "Saisissez le type d'assurance"
+        },
+        "policyNumber": {
+          "label": "Numéro de police",
+          "placeholder": "Saisissez le numéro de police"
+        },
+        "insuranceProvider": {
+          "label": "Assureur",
+          "placeholder": "Sélectionnez l'assureur",
+          "selectTypeFirst": "Sélectionnez d'abord le type d'assurance",
+          "customLabel": "Spécifiez l'assureur",
+          "customPlaceholder": "Saisissez le nom de l'assureur"
+        },
+        "nationalId": {
+          "label": "Numéro de sécurité sociale",
+          "placeholder": "Saisissez le numéro de sécurité sociale"
+        },
+        "emergencyContactName": {
+          "label": "Nom du contact d'urgence",
+          "placeholder": "Saisissez le nom du contact d'urgence"
+        },
+        "emergencyContactPhone": {
+          "label": "Téléphone du contact d'urgence",
+          "placeholder": "Saisissez le téléphone du contact d'urgence"
+        },
+        "emergencyContactRelation": {
+          "label": "Relation du contact d'urgence",
+          "placeholder": "Saisissez la relation"
+        },
+        "medicalHistory": {
+          "label": "Historique médical",
+          "placeholder": "Saisissez l'historique médical"
+        },
+        "allergies": {
+          "label": "Allergies",
+          "placeholder": "Saisissez les allergies"
+        },
+        "medications": {
+          "label": "Médicaments actuels",
+          "placeholder": "Saisissez les médicaments actuels"
+        },
+        "bloodType": {
+          "label": "Groupe sanguin",
+          "placeholder": "Sélectionnez le groupe sanguin"
+        }
+      }
+    },
+    "appointment": {
+      "title": "Informations du rendez-vous",
+      "fields": {
+        "patientId": {
+          "label": "Patient",
+          "placeholder": "Sélectionnez le patient"
+        },
+        "doctorId": {
+          "label": "Médecin",
+          "placeholder": "Sélectionnez le médecin"
+        },
+        "appointmentDate": {
+          "label": "Date du rendez-vous",
+          "placeholder": "Sélectionnez la date"
+        },
+        "appointmentTime": {
+          "label": "Heure du rendez-vous",
+          "placeholder": "Sélectionnez l'heure"
+        },
+        "duration": {
+          "label": "Durée (minutes)",
+          "placeholder": "Saisissez la durée"
+        },
+        "reason": {
+          "label": "Motif de la visite",
+          "placeholder": "Saisissez le motif de la visite"
+        },
+        "notes": {
+          "label": "Notes supplémentaires",
+          "placeholder": "Saisissez des notes supplémentaires"
+        },
+        "priority": {
+          "label": "Priorité",
+          "placeholder": "Sélectionnez le niveau de priorité"
+        }
+      }
+    }
+  },
+  "validation": {
+    "required": "Ce champ est obligatoire",
+    "email": "Veuillez saisir une adresse e-mail valide",
+    "phone": "Veuillez saisir un numéro de téléphone valide",
+    "minLength": "La longueur minimale est {min} caractères",
+    "maxLength": "La longueur maximale est {max} caractères",
+    "pattern": "Veuillez saisir une valeur valide",
+    "date": "Veuillez saisir une date valide",
+    "time": "Veuillez saisir une heure valide",
+    "number": "Veuillez saisir un nombre valide",
+    "postalCode": "Veuillez saisir un code postal valide"
+  },
+  "admin": {
+    "title": "Administration",
+    "formConfig": "Configuration des formulaires",
+    "userManagement": "Gestion des utilisateurs",
+    "systemSettings": "Paramètres système",
+    "reports": "Rapports",
+    "localization": "Localisation",
+    "translations": "Traductions",
+    "supportedLocales": "Langues prises en charge",
+    "currentLocale": "Langue actuelle",
+    "changeLocale": "Changer de langue"
+  },
+  "errors": {
+    "general": "Une erreur s'est produite. Veuillez réessayer.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion.",
+    "notFound": "La ressource demandée n'a pas été trouvée.",
+    "unauthorized": "Vous n'êtes pas autorisé à effectuer cette action.",
+    "forbidden": "Accès refusé.",
+    "serverError": "Erreur serveur. Veuillez réessayer plus tard.",
+    "validation": "Veuillez corriger les champs mis en évidence.",
+    "formConfigNotAvailable": "Configuration du formulaire non disponible. Impossible de modifier le patient."
+  },
+  "success": {
+    "saved": "Modifications enregistrées avec succès",
+    "deleted": "Élément supprimé avec succès",
+    "created": "Élément créé avec succès",
+    "updated": "Élément mis à jour avec succès"
+  },
+  "tables": {
+    "noData": "Aucune donnée disponible",
+    "loading": "Chargement des données...",
+    "rowsPerPage": "Lignes par page",
+    "of": "de",
+    "firstPage": "Première page",
+    "lastPage": "Dernière page",  
+    "nextPage": "Page suivante",
+    "previousPage": "Page précédente",
+    "showing": "Affichage",
+    "to": "à",
+    "results": "résultats"
+  },
+  "time": {
+    "now": "Maintenant",
+    "today": "Aujourd'hui",
+    "yesterday": "Hier",
+    "tomorrow": "Demain",
+    "thisWeek": "Cette semaine",
+    "lastWeek": "La semaine dernière",
+    "nextWeek": "La semaine prochaine",
+    "thisMonth": "Ce mois-ci",
+    "lastMonth": "Le mois dernier",
+    "nextMonth": "Le mois prochain",
+    "am": "AM",
+    "pm": "PM"
+  }
+}
