@@ -51,6 +51,11 @@ func LoadConfig() *Config {
 				BaseURL: getEnv("LOCATION_SERVICE_URL", "http://location-service:8084"),
 				Timeout: getEnvInt("LOCATION_SERVICE_TIMEOUT", 15),
 			},
+			"config-service": {
+				Name:    "config-service",
+				BaseURL: getEnv("CONFIG_SERVICE_URL", "http://config-service:8085"),
+				Timeout: getEnvInt("CONFIG_SERVICE_TIMEOUT", 15),
+			},
 		},
 		Routes: []RouteConfig{
 			// Auth routes (no auth required) - specific endpoints
@@ -162,6 +167,29 @@ func LoadConfig() *Config {
 				StripPrefix: false,
 				AuthRequired: false,
 				RolesAllowed: []string{},
+			},
+			// Config public routes (no auth)
+			{
+				Path: "/api/config/bootstrap",
+				Service: "config-service",
+				StripPrefix: false,
+				AuthRequired: false,
+				RolesAllowed: []string{},
+			},
+			{
+				Path: "/api/config/public/*path",
+				Service: "config-service",
+				StripPrefix: false,
+				AuthRequired: false,
+				RolesAllowed: []string{},
+			},
+			// Config admin routes (auth required, admin only)
+			{
+				Path: "/api/config/admin/*path",
+				Service: "config-service",
+				StripPrefix: false,
+				AuthRequired: true,
+				RolesAllowed: []string{"admin"},
 			},
 		},
 		RateLimit: RateLimitConfig{

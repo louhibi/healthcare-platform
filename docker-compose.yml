@@ -140,6 +140,28 @@ services:
       retries: 6
     restart: unless-stopped
 
+  config-db:
+    image: postgres:15-alpine
+    container_name: healthcare-config-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${CONFIG_DB_NAME}
+      POSTGRES_USER: ${CONFIG_DB_USER}
+      POSTGRES_PASSWORD: ${CONFIG_DB_PASSWORD}
+    ports:
+      - "5436:5432"
+    volumes:
+      - config_db_data:/var/lib/postgresql/data
+      - ./infrastructure/database/init-config-db.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d config_service_db"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+
   patient-service:
     build:
       context: ./services/patient-service
@@ -241,6 +263,39 @@ services:
       retries: 6
     restart: unless-stopped
 
+  config-service:
+    build:
+      context: ./services/config-service
+      dockerfile: Dockerfile
+      args:
+        GITHUB_TOKEN: ${GITHUB_TOKEN}
+    container_name: healthcare-config-service
+    env_file:
+      - .env
+      - ./services/config-service/.env.example
+    environment:
+      DB_HOST: ${CONFIG_DB_HOST}
+      DB_PORT: ${CONFIG_DB_PORT}
+      DB_USER: ${CONFIG_DB_USER}
+      DB_PASSWORD: ${CONFIG_DB_PASSWORD}
+      DB_NAME: ${CONFIG_DB_NAME}
+      PORT: ${CONFIG_SERVICE_PORT}
+      ENV: ${APP_ENV}
+      LOG_LEVEL: ${LOG_LEVEL}
+    ports:
+      - "${CONFIG_SERVICE_PORT}:${CONFIG_SERVICE_PORT}"
+    depends_on:
+      config-db:
+        condition: service_healthy
+    networks:
+      - healthcare-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8085/health"]
+      interval: 5s
+      timeout: 10s
+      retries: 6
+    restart: unless-stopped
+
   api-gateway:
     build:
       context: ./services/api-gateway
@@ -272,6 +327,8 @@ services:
         condition: service_healthy
       location-service:
         condition: service_healthy
+      config-service:
+        condition: service_healthy
     networks:
       - healthcare-network
     healthcheck:
@@ -286,16 +343,10 @@ services:
     build:
       context: ./frontend/patient-portal
       dockerfile: Dockerfile
-      args:
-        VITE_API_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}
-        VITE_API_BASE_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}/api
     container_name: healthcare-frontend
     env_file:
       - .env
       - ./frontend/patient-portal/.env.example
-    environment:
-      VITE_API_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}
-      VITE_API_BASE_URL: http://system76-pc.home.arpa:${API_GATEWAY_PORT}/api
     ports:
       - "0.0.0.0:3000:3000"
     depends_on:
@@ -331,6 +382,7 @@ volumes:
   patient_db_data:
   appointment_db_data:
   location_db_data:
+  config_db_data:
   redis_data:
 
 networks:
