@@ -38,9 +38,12 @@ app.use(Toast, {
 
 // Initialize auth store and i18n before mounting
 import { useAuthStore } from './stores/auth'
+import { useBootstrapStore } from './stores/bootstrap'
 import { useI18n } from './composables/useI18n'
 
 async function initializeApp() {
+  const bootstrapStore = useBootstrapStore()
+  await bootstrapStore.fetchBootstrap()
   const authStore = useAuthStore()
   
   // Initialize auth state from localStorage if available

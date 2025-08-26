@@ -101,8 +101,8 @@
         </div>
       </form>
 
-      <!-- Demo Credentials -->
-      <div class="mt-6 p-4 bg-yellow-50 rounded-md">
+  <!-- Demo Credentials (development only) -->
+  <div v-if="showDemoCreds" class="mt-6 p-4 bg-yellow-50 rounded-md">
         <h3 class="text-sm font-medium text-yellow-800 mb-2">Demo Credentials:</h3>
         <div class="text-xs text-yellow-700 space-y-1">
           <div><strong>Admin:</strong> admin@healthcare.local / admin123</div>
@@ -115,10 +115,11 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import { useToast } from 'vue-toastification'
+import { useBootstrapStore } from '../stores/bootstrap'
 
 export default {
   name: 'Login',
@@ -127,7 +128,7 @@ export default {
     const authStore = useAuthStore()
     const toast = useToast()
     
-    const form = ref({
+  const form = ref({
       email: '',
       password: '',
       rememberMe: false
@@ -136,7 +137,10 @@ export default {
     const loading = ref(false)
     const error = ref('')
 
-    const handleLogin = async () => {
+  const bootstrapStore = useBootstrapStore()
+  const showDemoCreds = computed(() => bootstrapStore.environment === 'development')
+
+  const handleLogin = async () => {
       if (!form.value.email || !form.value.password) {
         error.value = 'Please fill in all fields'
         return
@@ -164,7 +168,8 @@ export default {
       form,
       loading,
       error,
-      handleLogin
+      handleLogin,
+      showDemoCreds
     }
   }
 }
