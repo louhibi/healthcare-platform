@@ -57,6 +57,18 @@ func main() {
 		os.Exit(1)
 	}
 
+	// Verify schema migrations reached latest version before proceeding
+	currentVersion, err := engine.GetCurrentSchemaVersion()
+	if err != nil {
+		logging.LogError("Failed to get current schema version", "error", err)
+		os.Exit(1)
+	}
+	expectedVersion := schemaMigrations[len(schemaMigrations)-1].Version
+	if currentVersion < expectedVersion {
+		logging.LogError("Schema migrations incomplete; skipping data migrations", "current_version", currentVersion, "expected_version", expectedVersion)
+		os.Exit(1)
+	}
+
 	logging.LogInfo("Running data migrations automatically...")
 	dataMigrations := GetDataMigrations()
 	if err := engine.RunDataMigrations(dataMigrations, "all", 0); err != nil {

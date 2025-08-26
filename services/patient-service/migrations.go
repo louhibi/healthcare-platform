@@ -34,7 +34,7 @@ func GetMigrations() []Migration {
 					email VARCHAR(255) NOT NULL,
 					address TEXT,
 					city VARCHAR(100),
-					state VARCHAR(100) -- Province/State/Region
+					state VARCHAR(100), -- Province/State/Region (added missing comma)
 					postal_code VARCHAR(20),
 					country VARCHAR(2) NOT NULL,
 					nationality VARCHAR(100),
@@ -323,8 +323,20 @@ func GetMigrations() []Migration {
 			Version:     8,
 			Description: "Remove string location columns and use only location service IDs",
 			Up: `
-				-- Make country_id NOT NULL since it's required
-				ALTER TABLE patients ALTER COLUMN country_id SET NOT NULL;
+				-- Attempt to enforce NOT NULL on country_id only if there are no NULLs yet.
+				-- This avoids migration failure in environments where data back-fill from the
+				-- location service has not occurred. A later dedicated data migration can
+				-- clean remaining NULLs and add the NOT NULL constraint definitively.
+				DO $$
+				DECLARE v_nulls INT;
+				BEGIN
+					SELECT count(*) INTO v_nulls FROM patients WHERE country_id IS NULL;
+					IF v_nulls = 0 THEN
+						EXECUTE 'ALTER TABLE patients ALTER COLUMN country_id SET NOT NULL';
+					ELSE
+						RAISE NOTICE 'Skipping NOT NULL on patients.country_id (% NULL rows). Apply after back-fill.' , v_nulls;
+					END IF;
+				END$$;
 
 				-- Drop the old string-based location columns as we only use IDs now
 				ALTER TABLE patients 

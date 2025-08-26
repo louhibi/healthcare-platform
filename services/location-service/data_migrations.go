@@ -279,7 +279,6 @@ func GetDataMigrations() []DataMigration {
 				);
 			`,
 		},
-		/*
 		{
 			Version:        9,
 			Description:    "Load comprehensive Moroccan cities for all 12 regions",
@@ -389,11 +388,10 @@ func GetDataMigrations() []DataMigration {
 				AND name_en NOT IN ('Casablanca', 'Rabat', 'Fez', 'Marrakech');
 			`,
 		},
-		*/
 		{
 			Version:        10,
 			Description:    "Load comprehensive Moroccan insurance system data",
-			RequiredSchema: 4, // Requires insurance tables from schema migration 4
+			RequiredSchema: 6, // Requires insurance tables from schema migration 6 (renumbered from 4)
 			Environment:    "all",
 			CanRerun:       false, // Prevent duplicate insertions
 			Tags:           []string{"insurance", "morocco"},

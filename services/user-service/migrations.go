@@ -61,6 +61,17 @@ func GetMigrations() []Migration {
 					updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 				);
 
+				-- Ensure healthcare_entity_id column exists (for idempotency if users table pre-existed without it)
+				DO $$
+				BEGIN
+					IF NOT EXISTS (
+						SELECT 1 FROM information_schema.columns 
+						WHERE table_name='users' AND column_name='healthcare_entity_id'
+					) THEN
+						ALTER TABLE users ADD COLUMN healthcare_entity_id INTEGER REFERENCES healthcare_entities(id);
+					END IF;
+				END$$;
+
 				-- Indexes
 				CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 				CREATE INDEX IF NOT EXISTS idx_users_role ON users(role);
@@ -315,18 +326,51 @@ func GetMigrations() []Migration {
 		},
 		{
 			Version:     4,
-			Description: "Rename locale to language for consistency",
+			Description: "Rename language to locale columns (idempotent rename handling)",
 			Up: `
-				-- Rename columns for consistency with healthcare platform standards
-				ALTER TABLE healthcare_entities DROP CONSTRAINT IF EXISTS healthcare_entities_language_check;
-				ALTER TABLE healthcare_entities RENAME COLUMN language TO locale;
-				ALTER TABLE healthcare_entities ADD CONSTRAINT healthcare_entities_locale_check 
-					CHECK (locale IN ('en', 'fr', 'ar'));
-				
-				ALTER TABLE users DROP CONSTRAINT IF EXISTS users_preferred_language_check;
-				ALTER TABLE users RENAME COLUMN preferred_language TO preferred_locale;
-				ALTER TABLE users ADD CONSTRAINT users_preferred_locale_check 
-					CHECK (preferred_locale IS NULL OR preferred_locale = '' OR preferred_locale IN ('en', 'fr', 'ar'));
+				-- Idempotent rename of healthcare_entities.language -> locale and users.preferred_language -> preferred_locale
+				DO $$
+				BEGIN
+					-- Healthcare entities table rename
+					IF EXISTS (
+						SELECT 1 FROM information_schema.columns 
+						WHERE table_name = 'healthcare_entities' AND column_name = 'language'
+					) THEN
+						-- Drop old constraint if present before renaming
+						ALTER TABLE healthcare_entities DROP CONSTRAINT IF EXISTS healthcare_entities_language_check;
+						ALTER TABLE healthcare_entities RENAME COLUMN language TO locale;
+					END IF;
+
+					-- Add new constraint if not already present (after ensuring locale column exists)
+					IF EXISTS (
+						SELECT 1 FROM information_schema.columns 
+						WHERE table_name = 'healthcare_entities' AND column_name = 'locale'
+					) AND NOT EXISTS (
+						SELECT 1 FROM pg_constraint WHERE conname = 'healthcare_entities_locale_check'
+					) THEN
+						ALTER TABLE healthcare_entities ADD CONSTRAINT healthcare_entities_locale_check CHECK (locale IN ('en', 'fr', 'ar'));
+					END IF;
+
+					-- Users table rename
+					IF EXISTS (
+						SELECT 1 FROM information_schema.columns 
+						WHERE table_name = 'users' AND column_name = 'preferred_language'
+					) THEN
+						ALTER TABLE users DROP CONSTRAINT IF EXISTS users_preferred_language_check;
+						ALTER TABLE users RENAME COLUMN preferred_language TO preferred_locale;
+					END IF;
+
+					-- Add users preferred_locale constraint if missing
+					IF EXISTS (
+						SELECT 1 FROM information_schema.columns 
+						WHERE table_name = 'users' AND column_name = 'preferred_locale'
+					) AND NOT EXISTS (
+						SELECT 1 FROM pg_constraint WHERE conname = 'users_preferred_locale_check'
+					) THEN
+						ALTER TABLE users ADD CONSTRAINT users_preferred_locale_check 
+							CHECK (preferred_locale IS NULL OR preferred_locale = '' OR preferred_locale IN ('en', 'fr', 'ar'));
+					END IF;
+				END$$;
 			`,
 			Down: `
 				-- Revert column names and constraints
@@ -342,42 +386,11 @@ func GetMigrations() []Migration {
 			`,
 		},
 		{
-			Version:     6,
-			Description: "Update healthcare_entities to use location service IDs",
-			Up: `
-				-- Add new location ID columns for integration with location service
-				ALTER TABLE healthcare_entities 
-				ADD COLUMN country_id INTEGER,
-				ADD COLUMN state_id INTEGER,
-				ADD COLUMN city_id INTEGER;
-
-				-- Add indexes for the new foreign key columns
-				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_country_id ON healthcare_entities(country_id);
-				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_state_id ON healthcare_entities(state_id);
-				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_city_id ON healthcare_entities(city_id);
-
-				-- Note: String columns (country, state, city) kept for backward compatibility
-				-- They will be populated by API Gateway from location service
-				-- In a future migration, we can make country_id NOT NULL and drop string columns
-			`,
-			Down: `
-				-- Remove the location ID columns
-				DROP INDEX IF EXISTS idx_healthcare_entities_country_id;
-				DROP INDEX IF EXISTS idx_healthcare_entities_state_id;
-				DROP INDEX IF EXISTS idx_healthcare_entities_city_id;
-				
-				ALTER TABLE healthcare_entities 
-				DROP COLUMN IF EXISTS country_id,
-				DROP COLUMN IF EXISTS state_id,
-				DROP COLUMN IF EXISTS city_id;
-			`,
-		},
-		{
 			Version:     5,
 			Description: "Update nationality field to use dropdown instead of text input and rename to nationality_id",
 			Up: `
-				-- Change nationality field from text to select type and update field name
-				UPDATE form_fields 
+				-- Change nationality field from text to select type and update field name in field_definitions
+				UPDATE field_definitions 
 				SET field_type = 'select',
 					name = 'nationality_id',
 					placeholder_text = ''
@@ -386,7 +399,7 @@ func GetMigrations() []Migration {
 			`,
 			Down: `
 				-- Revert nationality field back to text input with original name
-				UPDATE form_fields 
+				UPDATE field_definitions 
 				SET field_type = 'text',
 					name = 'nationality',
 					placeholder_text = 'Enter nationality'
@@ -396,31 +409,31 @@ func GetMigrations() []Migration {
 		},
 		{
 			Version:     6,
-			Description: "Update healthcare entities to use country_id instead of country string",
+			Description: "Update healthcare_entities to use location service IDs (country_id, state_id, city_id) and indexes",
 			Up: `
-				-- Add country_id column to healthcare_entities
-				ALTER TABLE healthcare_entities ADD COLUMN country_id INTEGER;
+				-- Add new location ID columns (if not already present) for integration with location service
+				ALTER TABLE healthcare_entities 
+				ADD COLUMN IF NOT EXISTS country_id INTEGER,
+				ADD COLUMN IF NOT EXISTS state_id INTEGER,
+				ADD COLUMN IF NOT EXISTS city_id INTEGER;
 
-				-- Convert existing country strings to country_id references
-				-- This will be handled by application logic since we can't cross-reference
-				-- other microservice databases directly in SQL
-				
-				-- Manually set country_id based on known country codes for existing data
-				UPDATE healthcare_entities SET country_id = 1 WHERE UPPER(TRIM(country)) = 'CA';
-				UPDATE healthcare_entities SET country_id = 2 WHERE UPPER(TRIM(country)) = 'US';
-				UPDATE healthcare_entities SET country_id = 3 WHERE UPPER(TRIM(country)) = 'MA';
-				UPDATE healthcare_entities SET country_id = 4 WHERE UPPER(TRIM(country)) = 'FR';
-
-				-- Add index for the new foreign key column
+				-- Add indexes for the new foreign key columns
 				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_country_id ON healthcare_entities(country_id);
+				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_state_id ON healthcare_entities(state_id);
+				CREATE INDEX IF NOT EXISTS idx_healthcare_entities_city_id ON healthcare_entities(city_id);
 
-				-- Note: Keep country string column temporarily for backward compatibility
-				-- Will be removed in a future migration after verification
+				-- Note: String columns (country, state, city) kept for backward compatibility
+				-- Future migration can enforce NOT NULL and remove string columns
 			`,
 			Down: `
-				-- Remove the country_id column and index
+				-- Remove the location ID columns and indexes
+				DROP INDEX IF EXISTS idx_healthcare_entities_city_id;
+				DROP INDEX IF EXISTS idx_healthcare_entities_state_id;
 				DROP INDEX IF EXISTS idx_healthcare_entities_country_id;
-				ALTER TABLE healthcare_entities DROP COLUMN IF EXISTS country_id;
+				ALTER TABLE healthcare_entities 
+				DROP COLUMN IF EXISTS city_id,
+				DROP COLUMN IF EXISTS state_id,
+				DROP COLUMN IF EXISTS country_id;
 			`,
 		},
 	}

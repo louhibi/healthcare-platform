@@ -328,7 +328,7 @@ func GetSchemaMigrations() []SchemaMigration {
 			`,
 		},
 		{
-			Version:     4,
+			Version:     6,
 			Description: "Create insurance tables with multi-locale support",
 			Up: `
 				-- Insurance Types table with locale support
